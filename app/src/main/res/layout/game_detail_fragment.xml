@@ -4,6 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".ui.games.detail.DetailFragment">
 
+    <data>
+        <variable
+            name="viewModel"
+            type="eu.jeroenvisser.populargames.ui.games.detail.DetailViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/game_details_recycler_view"
         android:layout_width="match_parent"
@@ -23,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            tools:text="Game title"
+            tools:text="@{viewModel.selectedGame.title}"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"

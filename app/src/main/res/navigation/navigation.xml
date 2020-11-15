@@ -18,5 +18,10 @@
         android:id="@+id/detailFragment"
         android:name="eu.jeroenvisser.populargames.ui.games.detail.DetailFragment"
         android:label="game_detail_fragment"
-        tools:layout="@layout/game_detail_fragment" />
+        tools:layout="@layout/game_detail_fragment">
+        <argument
+            android:name="selectedGame"
+            app:argType="eu.jeroenvisser.populargames.data.entities.Game" />
+    </fragment>
+
 </navigation>

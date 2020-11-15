@@ -15,7 +15,7 @@ class GameOverviewAdapter(
 ) : RecyclerView.Adapter<GameViewHolder>() {
 
     interface GameItemListener {
-        fun onClick(gameId: Int)
+        fun onClick(game: Game)
     }
 
     private val items = ArrayList<Game>()
@@ -70,6 +70,6 @@ class GameViewHolder(
     }
 
     override fun onClick(v: View?) {
-        listener.onClick(gameId = game.id)
+        listener.onClick(game = game)
     }
 }
