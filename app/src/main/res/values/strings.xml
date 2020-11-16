@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">PopularGames</string>
+    <string name="navigation_game_detail_label">More information</string>
+    <string name="navigation_game_overview_label">List of popular games</string>
 </resources>
