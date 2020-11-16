@@ -7,13 +7,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import eu.jeroenvisser.populargames.data.entities.Game
 import eu.jeroenvisser.populargames.data.repository.GameRepository
+import eu.jeroenvisser.populargames.utils.DataState
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 enum class ApiStatus { LOADING, ERROR, DONE }
 
 class OverviewViewModel @ViewModelInject constructor(
-    repository: GameRepository
+    private val gameRepository: GameRepository
 ) : ViewModel() {
 
     private val _status = MutableLiveData<ApiStatus>()
@@ -29,7 +30,7 @@ class OverviewViewModel @ViewModelInject constructor(
         get() = _navigateToSelectedGame
 
     init {
-        loadGames(repository)
+        loadGames(gameRepository)
     }
 
     private fun loadGames(repository: GameRepository) {
@@ -52,4 +53,11 @@ class OverviewViewModel @ViewModelInject constructor(
     fun displayGameDetailsOnComplete() {
         _navigateToSelectedGame.value = null
     }
+}
+
+sealed class MainStateEvent{
+
+    object GetGamesEvent: MainStateEvent()
+
+    object None: MainStateEvent()
 }

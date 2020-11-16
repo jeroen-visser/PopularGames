@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
+import eu.jeroenvisser.populargames.data.entities.Game
 import eu.jeroenvisser.populargames.databinding.GameOverviewFragmentBinding
+import eu.jeroenvisser.populargames.utils.DataState
 
 @AndroidEntryPoint
 class OverviewFragment : Fragment() {
