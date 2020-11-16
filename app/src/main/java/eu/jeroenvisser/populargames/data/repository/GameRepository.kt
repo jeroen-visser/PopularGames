@@ -1,12 +1,10 @@
 package eu.jeroenvisser.populargames.data.repository
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import eu.jeroenvisser.populargames.data.entities.Cover
 import eu.jeroenvisser.populargames.data.entities.Game
 
 class GameRepository {
-    fun games(): LiveData<List<Game>> {
+    fun games(): List<Game> {
 
         val listOfGames = ArrayList<Game>()
 
@@ -151,7 +149,7 @@ class GameRepository {
             )
         )
 
-        return MutableLiveData(listOfGames)
+        return listOfGames
 
     }
 }

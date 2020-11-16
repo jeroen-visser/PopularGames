@@ -1,22 +1,21 @@
 package eu.jeroenvisser.populargames.ui.games.overview
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import eu.jeroenvisser.populargames.R
-import eu.jeroenvisser.populargames.data.entities.Game
 import eu.jeroenvisser.populargames.databinding.GameOverviewFragmentBinding
 
 @AndroidEntryPoint
-class OverviewFragment : Fragment(), GameOverviewAdapter.GameItemListener {
+class OverviewFragment : Fragment() {
+
+    private val viewModel: OverviewViewModel by lazy {
+        ViewModelProvider(this).get(OverviewViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -24,23 +23,24 @@ class OverviewFragment : Fragment(), GameOverviewAdapter.GameItemListener {
         savedInstanceState: Bundle?
     ): View? {
         val binding = GameOverviewFragmentBinding.inflate(inflater, container, false)
-        val adapter = GameOverviewAdapter(this)
 
-        binding.gameOverviewRecyclerView.layoutManager = LinearLayoutManager(requireContext())
-        binding.gameOverviewRecyclerView.adapter = adapter
+        // Allows data binding to Observe LiveData with the lifecycle
+        binding.lifecycleOwner = this
+        binding.viewModel = viewModel
 
-        val viewModel = ViewModelProvider(this).get(OverviewViewModel::class.java)
-
-        viewModel.games.observe(viewLifecycleOwner, {
-            adapter.setItems(ArrayList(it))
+        binding.gameOverviewRecyclerView.adapter = GameOverviewAdapter(GameOverviewAdapter.OnClickListener {
+            viewModel.displayGameDetails(it)
         })
 
-        return binding.root
-    }
+        viewModel.navigateToSelectedGame.observe(viewLifecycleOwner, {
+            if (null != it) {
+                this.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToDetailFragment(it))
+                viewModel.displayGameDetailsOnComplete()
+            }
+        })
 
-    override fun onClick(game: Game) {
-        findNavController().navigate(
-            OverviewFragmentDirections.actionOverviewFragmentToDetailFragment(game)
-        )
+        setHasOptionsMenu(true)
+
+        return binding.root
     }
 }

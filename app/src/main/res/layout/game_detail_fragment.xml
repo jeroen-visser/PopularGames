@@ -22,7 +22,8 @@
             android:layout_marginTop="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:imageUrl="@{viewModel.selectedGame.cover.url}" />
 
         <TextView
             android:id="@+id/game_title"
