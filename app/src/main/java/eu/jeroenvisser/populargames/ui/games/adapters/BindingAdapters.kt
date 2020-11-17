@@ -1,6 +1,7 @@
 package eu.jeroenvisser.populargames.ui.games.adapters
 
 import android.widget.ImageView
+import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -12,8 +13,9 @@ import eu.jeroenvisser.populargames.ui.games.overview.GameOverviewAdapter
 @BindingAdapter("imageUrl")
 fun bindImage(imageView: ImageView, imageUrl: String?) {
     imageUrl?.let {
+        val imgUri = imageUrl.toUri().buildUpon().scheme("https").build()
         Glide.with(imageView.context)
-            .load(imageUrl)
+            .load(imgUri)
             .apply(RequestOptions()
                 .placeholder(R.drawable.ic_launcher_background)
                 .error(R.drawable.ic_launcher_background))

@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import eu.jeroenvisser.populargames.data.entities.Game
 import eu.jeroenvisser.populargames.data.repository.GameRepository
 import eu.jeroenvisser.populargames.utils.DataState
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 
@@ -29,16 +30,12 @@ class OverviewViewModel @ViewModelInject constructor(
     val navigateToSelectedGame: LiveData<Game>
         get() = _navigateToSelectedGame
 
-    init {
-        loadGames(gameRepository)
-    }
-
-    private fun loadGames(repository: GameRepository) {
+    fun loadGames() {
         viewModelScope.launch {
             _status.value = ApiStatus.LOADING
             try {
                 _status.value = ApiStatus.DONE
-                _games.value = repository.games()
+                _games.value = gameRepository.games()
             } catch (e: Exception) {
                 _status.value = ApiStatus.ERROR
                 _games.value = ArrayList()
