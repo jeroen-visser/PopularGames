@@ -9,9 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import dagger.hilt.android.AndroidEntryPoint
-import eu.jeroenvisser.populargames.data.entities.Game
 import eu.jeroenvisser.populargames.databinding.GameOverviewFragmentBinding
-import eu.jeroenvisser.populargames.utils.DataState
 
 @AndroidEntryPoint
 class OverviewFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
@@ -33,7 +31,7 @@ class OverviewFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     override fun onRefresh() {
-        fetchGames()
+        fetchGames(forceRefresh = true)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -61,8 +59,8 @@ class OverviewFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         setHasOptionsMenu(true)
     }
 
-    fun fetchGames() {
-        viewModel.loadGames()
+    fun fetchGames(forceRefresh: Boolean = false) {
+        viewModel.loadGames(forceRefresh)
         binding.swipeContainer.isRefreshing = true
     }
 }
