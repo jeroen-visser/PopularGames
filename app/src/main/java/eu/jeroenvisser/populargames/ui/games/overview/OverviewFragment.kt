@@ -60,18 +60,25 @@ class OverviewFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         })
 
         viewModel.status.observe(viewLifecycleOwner, {
-            binding.swipeContainer.isRefreshing = false
-            Snackbar
-                .make(
-                    binding.root,
-                    getString(R.string.error_loading_games),
-                    Snackbar.LENGTH_INDEFINITE
-                )
-                .setAction(getString(R.string.retry)) { viewModel.loadGames() }
-                .show()
+            when(it) {
+                ApiStatus.ERROR -> renderSnackbar()
+                else -> {}
+            }
         })
 
         setHasOptionsMenu(true)
+    }
+
+    private fun renderSnackbar() {
+        binding.swipeContainer.isRefreshing = false
+        Snackbar
+            .make(
+                binding.root,
+                getString(R.string.error_loading_games),
+                Snackbar.LENGTH_LONG
+            )
+            .setAction(getString(R.string.retry)) { viewModel.loadGames() }
+            .show()
     }
 
     fun fetchGames() {
