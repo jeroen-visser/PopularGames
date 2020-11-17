@@ -27,6 +27,9 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField "String", "IGDB_API_KEY", "\"${IGDB_API_KEY}\""
+        buildConfigField "String", "IGDB_BEARER_TOKEN", "\"${IGDB_BEARER_TOKEN}\""
     }
 
     buildTypes {

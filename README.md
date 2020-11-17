@@ -6,6 +6,10 @@ detail fragment.
 
 ![Architecture](docs/architecture.png)
 
+## Install
+
+1. Set the credentials in the gradle.properties file
+
 ## Steps
 
 1. Add navigation and Fragments

@@ -1,6 +1,5 @@
 package eu.jeroenvisser.populargames.data.remote.igdb
 
-import android.util.Log
 import eu.jeroenvisser.populargames.data.entities.Cover
 import eu.jeroenvisser.populargames.data.entities.Game
 import eu.jeroenvisser.populargames.utils.EntityMapper

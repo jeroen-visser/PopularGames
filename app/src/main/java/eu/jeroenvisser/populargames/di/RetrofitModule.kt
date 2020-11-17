@@ -7,6 +7,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
+import eu.jeroenvisser.populargames.BuildConfig
 import eu.jeroenvisser.populargames.data.remote.igdb.IGDBGameRepository
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -25,8 +26,8 @@ object RetrofitModule {
             addInterceptor(
                 Interceptor { chain ->
                     val builder = chain.request().newBuilder()
-                    builder.header("Authorization", "Bearer ")
-                    builder.header("Client-ID", "")
+                    builder.header("Authorization", "Bearer ${BuildConfig.IGDB_BEARER_TOKEN}")
+                    builder.header("Client-ID", BuildConfig.IGDB_API_KEY)
                     return@Interceptor chain.proceed(builder.build())
                 }
             )
