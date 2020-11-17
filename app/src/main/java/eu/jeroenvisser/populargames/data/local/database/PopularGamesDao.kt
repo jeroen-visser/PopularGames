@@ -1,5 +1,6 @@
 package eu.jeroenvisser.populargames.data.local.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -13,6 +14,6 @@ interface PopularGamesDao {
         suspend fun insert(roomGameEntity: RoomGameEntity): Long
 
         @Query("SELECT * FROM games")
-        suspend fun all(): List<RoomGameEntity>
+        fun all(): LiveData<List<RoomGameEntity>>
 
 }

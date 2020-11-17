@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
+import eu.jeroenvisser.populargames.R
 import eu.jeroenvisser.populargames.databinding.GameOverviewFragmentBinding
 
 @AndroidEntryPoint
@@ -31,7 +33,7 @@ class OverviewFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
     }
 
     override fun onRefresh() {
-        fetchGames(forceRefresh = true)
+        fetchGames()
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -46,8 +48,9 @@ class OverviewFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
         binding.swipeContainer.setOnRefreshListener(this)
 
         val adapter = GameOverviewAdapter(GameOverviewAdapter.OnClickListener {
-            this.findNavController().navigate(OverviewFragmentDirections.actionOverviewFragmentToDetailFragment(it))
-            viewModel.displayGameDetailsOnComplete()
+            this.findNavController().navigate(
+                OverviewFragmentDirections.actionOverviewFragmentToDetailFragment(it)
+            )
         })
 
         binding.gameOverviewRecyclerView.adapter = adapter
@@ -56,11 +59,23 @@ class OverviewFragment : Fragment(), SwipeRefreshLayout.OnRefreshListener {
             binding.swipeContainer.isRefreshing = false
         })
 
+        viewModel.status.observe(viewLifecycleOwner, {
+            binding.swipeContainer.isRefreshing = false
+            Snackbar
+                .make(
+                    binding.root,
+                    getString(R.string.error_loading_games),
+                    Snackbar.LENGTH_INDEFINITE
+                )
+                .setAction(getString(R.string.retry)) { viewModel.loadGames() }
+                .show()
+        })
+
         setHasOptionsMenu(true)
     }
 
-    fun fetchGames(forceRefresh: Boolean = false) {
-        viewModel.loadGames(forceRefresh)
+    fun fetchGames() {
+        viewModel.loadGames()
         binding.swipeContainer.isRefreshing = true
     }
 }

@@ -8,8 +8,6 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import eu.jeroenvisser.populargames.data.entities.Game
-import eu.jeroenvisser.populargames.data.local.CachedGameRepository
-import eu.jeroenvisser.populargames.data.local.RoomCachedGameRepository
 import eu.jeroenvisser.populargames.data.local.database.PopularGamesDao
 import eu.jeroenvisser.populargames.data.local.database.PopularGamesDatabase
 import eu.jeroenvisser.populargames.data.local.entities.RoomGameEntity
@@ -43,14 +41,6 @@ object CacheModule {
     @Provides
     fun providePopularGamesDao(popularGamesDatabase: PopularGamesDatabase): PopularGamesDao {
         return popularGamesDatabase.popularGamesDao()
-    }
-
-
-
-    @Singleton
-    @Provides
-    fun provideCachedGameRepository(popularGamesDao: PopularGamesDao) : CachedGameRepository {
-        return RoomCachedGameRepository(popularGamesDao)
     }
 
 }

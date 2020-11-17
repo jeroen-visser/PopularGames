@@ -4,8 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
-import eu.jeroenvisser.populargames.data.local.CachedGameRepository
-import eu.jeroenvisser.populargames.data.local.RoomCachedGameRepository
+import eu.jeroenvisser.populargames.data.local.database.PopularGamesDao
 import eu.jeroenvisser.populargames.data.local.mappers.LocalGameMapper
 import eu.jeroenvisser.populargames.data.remote.igdb.IGDBGameRepository
 import eu.jeroenvisser.populargames.data.remote.igdb.IGDBGameRepositoryMapper
@@ -21,14 +20,14 @@ object RepositoryModule {
     fun provideGameRepository(
         IGDBGameRepository: IGDBGameRepository,
         retrofitGameRepositoryMapper: IGDBGameRepositoryMapper,
-        cachedGameRepository: CachedGameRepository,
-        localGameMapper: LocalGameMapper
+        localGameMapper: LocalGameMapper,
+        popularGamesDao: PopularGamesDao
     ) : GameRepository {
         return GameRepository(
             IGDBGameRepository,
             retrofitGameRepositoryMapper,
-            cachedGameRepository,
-            localGameMapper
+            localGameMapper,
+            popularGamesDao
         )
     }
 

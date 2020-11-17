@@ -2,4 +2,6 @@
     <string name="app_name">PopularGames</string>
     <string name="navigation_game_detail_label">More information</string>
     <string name="navigation_game_overview_label">List of popular games</string>
+    <string name="error_loading_games">Something went wrong</string>
+    <string name="retry">retry</string>
 </resources>
