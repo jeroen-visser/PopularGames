@@ -1,5 +1,6 @@
 package eu.jeroenvisser.populargames.di
 
+import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -29,6 +30,7 @@ object RetrofitModule {
                     return@Interceptor chain.proceed(builder.build())
                 }
             )
+            addNetworkInterceptor(StethoInterceptor())
         }.build()
     }
 
