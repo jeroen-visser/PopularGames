@@ -4,4 +4,7 @@
     <string name="navigation_game_overview_label">List of popular games</string>
     <string name="error_loading_games">Something went wrong</string>
     <string name="retry">retry</string>
+    <string name="detail_fragment_cover_image">The cover image</string>
+    <string name="detail_fragment_about_the_game">About the game</string>
+    <string name="detail_fragment_storyline">Storyline</string>
 </resources>

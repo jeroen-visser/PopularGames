@@ -12,6 +12,14 @@ data class GameDAO(
     @Expose
     var title: String,
 
+    @SerializedName("summary")
+    @Expose
+    var summary: String,
+
+    @SerializedName("storyline")
+    @Expose
+    var storyLine: String,
+
     @SerializedName("cover")
     @Expose
     var cover: GameDaoCover,
@@ -22,15 +30,15 @@ data class GameDAO(
 
     @SerializedName("rating_count")
     @Expose
-    var ratingCount: Int,
-
-    @SerializedName("summary")
-    @Expose
-    var summary: String
+    var ratingCount: Int
 
 )
 
 data class GameDaoCover(
+
+    @SerializedName("image_id")
+    @Expose
+    val imageId: String,
 
     @SerializedName("url")
     @Expose

@@ -14,6 +14,15 @@ data class RoomGameEntity(
     @ColumnInfo(name = "title")
     var title: String,
 
+    @ColumnInfo(name = "summary")
+    var summary: String,
+
+    @ColumnInfo(name = "storyLine")
+    var storyLine: String,
+
+    @ColumnInfo(name = "coverId")
+    var coverId: String,
+
     @ColumnInfo(name = "coverUrl")
     var coverUrl: String,
 
@@ -22,9 +31,6 @@ data class RoomGameEntity(
 
     @ColumnInfo(name = "coverHeight")
     var coverHeight: Int,
-
-    @ColumnInfo(name = "summary")
-    var summary: String,
 
     @ColumnInfo(name = "rating")
     var rating: Double,

@@ -11,12 +11,14 @@ class IGDBGameRepositoryMapper @Inject constructor() : EntityMapper<GameDAO, Gam
         return Game(
             entity.id,
             entity.title,
+            entity.summary,
+            entity.storyLine,
             Cover(
+                entity.cover.imageId,
                 entity.cover.url,
                 entity.cover.width,
                 entity.cover.height,
             ),
-            entity.summary,
             entity.rating,
             entity.ratingCount
         )
@@ -26,14 +28,16 @@ class IGDBGameRepositoryMapper @Inject constructor() : EntityMapper<GameDAO, Gam
         return GameDAO(
             domainModel.id,
             domainModel.title,
+            domainModel.summary,
+            domainModel.storyLine,
             GameDaoCover(
+                domainModel.cover.id,
                 domainModel.cover.url,
                 domainModel.cover.width,
                 domainModel.cover.height
             ),
             domainModel.rating,
-            domainModel.ratingCount,
-            domainModel.description
+            domainModel.ratingCount
         )
     }
 

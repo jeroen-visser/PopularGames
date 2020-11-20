@@ -12,12 +12,14 @@ class LocalGameMapper @Inject constructor() : EntityMapper<RoomGameEntity, Game>
         return Game(
             entity.id,
             entity.title,
+            entity.summary,
+            entity.storyLine,
             Cover(
+                entity.coverId,
                 entity.coverUrl,
                 entity.coverWidth,
                 entity.coverHeight
             ),
-            entity.summary,
             entity.rating,
             entity.ratingCount
         )
@@ -27,10 +29,12 @@ class LocalGameMapper @Inject constructor() : EntityMapper<RoomGameEntity, Game>
         return RoomGameEntity(
             domainModel.id,
             domainModel.title,
+            domainModel.summary,
+            domainModel.storyLine,
+            domainModel.cover.id,
             domainModel.cover.url,
             domainModel.cover.width,
             domainModel.cover.height,
-            domainModel.description,
             domainModel.rating,
             domainModel.ratingCount
         )
